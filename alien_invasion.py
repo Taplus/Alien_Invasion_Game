@@ -1,28 +1,30 @@
 import sys
 import pygame
 from  setting import Settings
+from ship import Ship
+import game_function as gf
+from pygame.sprite import Group
 
 def run_game():
+    
     ai_settings = Settings()#创建一个实例
     # 初始化游戏并创建一个屏幕对象
     pygame.init()
     screen = pygame.display.set_mode((ai_settings.screen_width,ai_settings.screen_height))
     pygame.display.set_caption("外星人入侵")
 
-    #设置背景色
-    bg_color = (ai_settings.bg_color)#灰色
+    #创建一艘飞船
+    ship = Ship(ai_settings , screen)
+    
+    #创建一个用于存储子弹的编组
+    bullets = Group()
+
+
     #开始游戏的主循环
     while True:
-
-        #监视键盘和鼠标事件
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-
-        #用背景色填充屏幕
-        screen.fill(bg_color)
-
-        #让最近绘制的屏幕可见
-        pygame.display.flip()
+        gf.check_events(ai_settings,screen,ship,bullets)
+        ship.update()
+        bullets.update()
+        gf.update_screen(ai_settings,screen,ship,bullets)
 
 run_game()
