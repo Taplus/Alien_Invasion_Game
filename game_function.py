@@ -22,9 +22,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
     elif event.key == pygame.K_SPACE:
         #创建一颗子弹，并将其加到编组bullets中
         new_bullet = Bullet(ai_settings,screen,ship)
-        bullets.add(new_bullet)    
-            elif event.key == pygame.K_SPACE:
-        fire_bullet(ai_settings, screen, ship, bullets)
+        bullets.add(new_bullet)   
 
 def check_keyup_events(event,ship):
     if event.key == pygame.K_RIGHT:
