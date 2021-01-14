@@ -6,7 +6,8 @@ class Bullet(Sprite):
 
     def  __init__(self,ai_settings,screen,ship):
         '''在飞船所处的位置创建一个子弹对象'''
-        super(Bullet,self).__init__()# 调用super()来继承.__inti__()
+        Sprite.__init__(self)
+        #super(Bullet,self).__init__()# 调用super()来继承.__inti__()
         self.screen = screen
 
         # 在(0,0)创建一个表示子弹的矩形，再设置正确的位置
