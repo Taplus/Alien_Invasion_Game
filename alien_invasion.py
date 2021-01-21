@@ -15,6 +15,9 @@ def run_game():
     # 初始化游戏并创建一个屏幕对象
     pygame.init()
     screen = pygame.display.set_mode((ai_settings.screen_width,ai_settings.screen_height))
+
+    programIcon = pygame.image.load("image\icon.bmp")
+    pygame.display.set_icon(programIcon)
     pygame.display.set_caption("外星人入侵")
 
     #创建一艘飞船
