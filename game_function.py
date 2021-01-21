@@ -26,7 +26,7 @@ def check_play_button(ai_settings,screen,stats,play_button,ship,aliens,bullets,m
     if button_clicked and not stats.game_active:
         # 重置游戏设置
         ai_settings.initialize_dynamic_settings()
-        
+
         # 隐藏光标
         pygame.mouse.set_visible(False)
         # 重置游戏统计信息
@@ -172,7 +172,7 @@ def  check_aliens_bottom(ai_settings,stats,screen,ship,aliens,bullets):
             break
      
 
-def update_screen(ai_settings,screen,stats,ship,aliens,bullets,play_button):
+def update_screen(ai_settings,screen,stats,sb,ship,aliens,bullets,play_button):
     '''更新屏幕上的图像并切换到新屏幕'''
     #用背景色填充屏幕
     screen.fill(ai_settings.bg_color)
@@ -182,6 +182,8 @@ def update_screen(ai_settings,screen,stats,ship,aliens,bullets,play_button):
     ship.blitme()
     aliens.draw(screen)
     #alien.blitme()
+    # 显示得分
+    sb.show_score()
     
     # 如果游戏处于非活动状态，就绘制 Play 按钮
     if not stats.game_active:
