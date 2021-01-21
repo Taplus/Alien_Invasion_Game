@@ -12,3 +12,6 @@ class GameStats():
         '''初始化在游戏运行期间可能变化的统计信息'''
         self.ship_left = self.ai_settings.ship_limit
         self.score = 0
+
+        # 历史最高分
+        self.high_score = 0

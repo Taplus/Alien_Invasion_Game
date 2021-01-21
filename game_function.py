@@ -64,7 +64,13 @@ def fire_bullet(ai_settings,screen,ship,bullets):
         new_bullet = Bullet(ai_settings,screen,ship)
         bullets.add(new_bullet)   
 
-def update_bullets(ai_settings,screen,ship,aliens,bullets):
+def check_high_score(stats,sb):
+    '''检查是否诞生了最高得分'''
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prep_high_score()
+
+def update_bullets(ai_settings,screen,stats,sb,ship,aliens,bullets):
     '''更新子弹的位置，并消除已消失的子弹'''
     bullets.update()
 
@@ -73,12 +79,17 @@ def update_bullets(ai_settings,screen,ship,aliens,bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-    check_bullet_alien_collisions(ai_settings,screen,ship,aliens,bullets)
+    check_bullet_alien_collisions(ai_settings,screen,stats,sb,ship,aliens,bullets)
 
-def check_bullet_alien_collisions(ai_settings,screen,ship,aliens,bullets):
+def check_bullet_alien_collisions(ai_settings,screen,stats,sb,ship,aliens,bullets):
     # 检查是否有子弹击中了外星人，若有就删除外星人和子弹
     collisios = pygame.sprite.groupcollide(bullets,aliens,True,True)
     # 模拟高能子弹，后两个参数设置为 False,True
+    if collisios:
+        for alien in collisios.values():
+            stats.score += ai_settings.alien_points
+            sb.prep_score()
+        check_high_score(stats,sb)
 
     #打完外星人后新建一批
     if(len(aliens) == 0):
