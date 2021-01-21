@@ -15,3 +15,5 @@ class GameStats():
 
         # 历史最高分
         self.high_score = 0
+
+        self.level = 1
